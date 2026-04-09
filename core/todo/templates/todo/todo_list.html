@@ -1,0 +1,30 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<h2>All Todos</h2>
+
+<a href="{% url 'todo-create' %}">➕ Create New Todo</a>
+
+<ul>
+    {% for todo in todos %}
+        <li>
+            <strong>{{ todo.title }}</strong>
+
+            {% if todo.completed %}
+                ✅
+            {% else %}
+                ❌
+            {% endif %}
+
+            | <a href="{% url 'todo-detail' todo.id %}">View</a>
+            | <a href="{% url 'todo-update' todo.id %}">Edit</a>
+            | <a href="{% url 'todo-delete' todo.id %}">Delete</a>
+            | <a href="{% url 'todo-toggle-complete' todo.id %}">Toggle</a>
+        </li>
+    {% empty %}
+        <li>No todos available</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
